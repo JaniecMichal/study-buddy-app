@@ -1,0 +1,30 @@
+export const theme = {
+  fontSize: {
+    xxSmall: '10px',
+    xSmall: '11px',
+    small: '12px',
+    normal: '15px',
+    medium: '17px',
+    large: '18px',
+    xlarge: '20px',
+    xxlarge: '30px',
+  },
+  colors: {
+    white: '#FFFFFF',
+    mercury: '#E5E5E5',
+    heather: '#C0C7D6',
+    puce: '#CB8581',
+    zombie: '#E1D888',
+    deYork: '#8FCB81',
+    raven: '#737C8E',
+    vidaLoca: '#3EAE24',
+    gold: '#FFD700',
+  },
+  media: {
+    extraMobileSmall: '340px',
+    extraMobile: '575.98px',
+    mobile: '767.98px',
+    tablet: '991.98px',
+    desktop: '1199.98px',
+  },
+};
