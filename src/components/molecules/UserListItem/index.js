@@ -6,11 +6,14 @@ import UserName from 'components/atoms/UserName';
 import Button from 'components/atoms/Button';
 import { ReactComponent as RemoveIcon } from 'assets/images/removeIcon.svg';
 
-const UserListItem = ({ userData: { name, attendance = '0%', average } }) => (
+const UserListItem = ({
+  deleteUser,
+  userData: { name, attendance = '0%', average },
+}) => (
   <ItemWrapper>
     <UserAverage average={average} />
     <UserName name={name} attendance={attendance} />
-    <Button>
+    <Button onClick={() => deleteUser(name)}>
       <RemoveIcon />
     </Button>
   </ItemWrapper>
