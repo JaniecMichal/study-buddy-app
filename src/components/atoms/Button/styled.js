@@ -11,4 +11,8 @@ export const StyledButton = styled.button`
   svg {
     stroke: ${({ theme }) => theme.colors.white};
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
