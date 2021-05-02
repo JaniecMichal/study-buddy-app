@@ -8,7 +8,7 @@ export const StyledAverage = styled.div`
   border-radius: 100%;
   background-color: ${({ theme }) => theme.colors.puce};
   color: ${({ theme }) => theme.colors.white};
-  font-size: ${({ theme }) => theme.fontSize.small};
+  font-size: ${({ theme }) => theme.fontSize.medium};
   font-weight: 700;
   display: flex;
   align-items: center;
