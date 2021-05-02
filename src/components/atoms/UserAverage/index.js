@@ -8,7 +8,7 @@ const UserAverage = ({ average }) => {
       goodRate={average <= 5 && average > 4 ? true : false}
       perfectRate={average <= 6 && average > 5 ? true : false}
     >
-      <span>{average.toFixed(1)}</span>
+      <span>{Number(average).toFixed(1)}</span>
     </StyledAverage>
   );
 };
