@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { StyledList, Wrapper } from './styled';
+import { StyledList } from './styled';
 import UserListItem from 'components/molecules/UserListItem';
 import { usersData } from 'data/usersData.js';
 import { Title } from 'components/atoms/Title';
+import { ViewWrapper } from 'components/atoms/ViewWrapper';
 
 const mockAPI = (success) => {
   return new Promise((resolve, reject) => {
@@ -35,8 +36,14 @@ const UserList = () => {
     setUsers(filteredUsers);
   };
 
+  function average(a, b) {
+    return a + b / 2;
+  }
+
+  console.log(average(2, 1));
+
   return (
-    <Wrapper>
+    <ViewWrapper>
       <Title>{isLoading ? 'Loading...' : 'Users List:'}</Title>
       <StyledList>
         {users.map((user) => (
@@ -47,7 +54,7 @@ const UserList = () => {
           />
         ))}
       </StyledList>
-    </Wrapper>
+    </ViewWrapper>
   );
 };
 
