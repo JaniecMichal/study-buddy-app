@@ -22,6 +22,28 @@ export const mockAPI = (success) => {
 function App() {
   const [users, setUsers] = useState([]);
   const [isLoading, setLoadingState] = useState([]);
+  const [formValues, setFormValues] = useState({
+    name: '',
+    attendance: '',
+    average: '',
+  });
+
+  const handleInputChange = (e) => {
+    setFormValues({
+      ...formValues,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleAddUser = (e) => {
+    e.preventDefault();
+    const newUser = {
+      name: formValues.name,
+      attendance: formValues.attendance,
+      average: formValues.average,
+    };
+    setUsers([newUser, ...users]);
+  };
 
   useEffect(() => {
     setLoadingState(true);
@@ -43,7 +65,11 @@ function App() {
       <>
         <GlobalStyle />
         <MainWrapper>
-          <Form />
+          <Form
+            formValues={formValues}
+            handleInputChange={handleInputChange}
+            handleAddUser={handleAddUser}
+          />
           <UserList
             users={users}
             isLoading={isLoading}

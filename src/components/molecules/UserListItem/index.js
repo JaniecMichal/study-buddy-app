@@ -9,21 +9,23 @@ import { ReactComponent as RemoveIcon } from 'assets/images/removeIcon.svg';
 const UserListItem = ({
   deleteUser,
   userData: { name, attendance = '0%', average },
-}) => (
-  <ItemWrapper>
-    <UserAverage average={average} />
-    <UserName name={name} attendance={attendance} />
-    <Button onClick={() => deleteUser(name)}>
-      <RemoveIcon />
-    </Button>
-  </ItemWrapper>
-);
+}) => {
+  return (
+    <ItemWrapper>
+      <UserAverage average={average} />
+      <UserName name={name} attendance={attendance} />
+      <Button onClick={() => deleteUser(name)}>
+        <RemoveIcon />
+      </Button>
+    </ItemWrapper>
+  );
+};
 
 UserListItem.propTypes = {
   userData: PropTypes.shape({
     name: PropTypes.string.isRequired,
     attendance: PropTypes.string,
-    average: PropTypes.number.isRequired,
+    average: PropTypes.string.isRequired,
   }),
 };
 
