@@ -8,7 +8,7 @@ import { UserShape } from 'assets/helpers/types';
 const UsersList = ({ users, isLoading, deleteUser }) => {
   return (
     <>
-      <Title>{isLoading ? 'Loading...' : 'Users List:'}</Title>
+      <Title>{isLoading ? 'Loading...' : 'Students List:'}</Title>
       <StyledList>
         {isLoading ||
           users.map((user) => (

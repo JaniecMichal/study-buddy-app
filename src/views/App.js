@@ -10,6 +10,13 @@ import { toAddUserView, toDashboard } from 'assets/helpers/routes';
 import Dashboard from './Dashboard';
 import MainTemplate from 'components/templates/MainTemplate';
 
+export const UsersContext = React.createContext({
+  users: [],
+  handleAddUser: () => {},
+  deleteUser: () => {},
+  isLoading: false,
+});
+
 export const mockAPI = (success) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -25,25 +32,13 @@ export const mockAPI = (success) => {
 function App() {
   const [users, setUsers] = useState([]);
   const [isLoading, setLoadingState] = useState(false);
-  const [formValues, setFormValues] = useState({
-    name: '',
-    attendance: '',
-    average: '',
-  });
 
-  const handleInputChange = (e) => {
-    setFormValues({
-      ...formValues,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleAddUser = (e) => {
-    e.preventDefault();
+  const handleAddUser = (formValues) => {
     const newUser = {
       name: formValues.name,
       attendance: formValues.attendance,
       average: formValues.average,
+      isLoading,
     };
     setUsers([newUser, ...users]);
   };
@@ -69,27 +64,23 @@ function App() {
         <>
           <GlobalStyle />
           <MainTemplate>
-            <MainWrapper>
-              <Switch>
-                <Route path={toAddUserView()}>
-                  <AddUser
-                    formValues={formValues}
-                    handleInputChange={handleInputChange}
-                    handleAddUser={handleAddUser}
-                  />
-                </Route>
-                <Route path={toDashboard()}>
-                  <Dashboard
-                    users={users}
-                    isLoading={isLoading}
-                    deleteUser={deleteUser}
-                  />
-                </Route>
-                <Route>
-                  <Redirect to={toDashboard()} />
-                </Route>
-              </Switch>
-            </MainWrapper>
+            <UsersContext.Provider
+              value={{ users, handleAddUser, deleteUser, isLoading }}
+            >
+              <MainWrapper>
+                <Switch>
+                  <Route path={toAddUserView()}>
+                    <AddUser />
+                  </Route>
+                  <Route path={toDashboard()}>
+                    <Dashboard />
+                  </Route>
+                  <Route>
+                    <Redirect to={toDashboard()} />
+                  </Route>
+                </Switch>
+              </MainWrapper>
+            </UsersContext.Provider>
           </MainTemplate>
         </>
       </ThemeProvider>
