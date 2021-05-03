@@ -4,7 +4,7 @@ import { UserShape } from 'assets/helpers/types';
 import { ViewWrapper } from 'components/atoms/ViewWrapper';
 import UsersList from 'components/organisms/UsersList';
 
-const Dashboard = ({ users, deleteUser, isLoading }) => {
+const Dashboard = ({ users, isLoading, deleteUser }) => {
   return (
     <ViewWrapper>
       <UsersList users={users} deleteUser={deleteUser} isLoading={isLoading} />
