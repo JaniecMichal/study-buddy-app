@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Switch, Route, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { GlobalStyle } from 'assets/GlobalStyles/GlobalStyles.js';
 import { theme } from 'assets/theme/theme.js';
 import { ThemeProvider } from 'styled-components';
 import { MainWrapper } from './styled';
 import AddUser from 'views/AddUser';
 import { usersData } from 'data/usersData';
-import { toAddUserView, toUserListView } from 'assets/helpers/routes';
+import { toAddUserView, toDashboard } from 'assets/helpers/routes';
 import Dashboard from './Dashboard';
+import MainTemplate from 'components/templates/MainTemplate';
 
 export const mockAPI = (success) => {
   return new Promise((resolve, reject) => {
@@ -23,7 +24,7 @@ export const mockAPI = (success) => {
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [isLoading, setLoadingState] = useState([]);
+  const [isLoading, setLoadingState] = useState(false);
   const [formValues, setFormValues] = useState({
     name: '',
     attendance: '',
@@ -67,31 +68,29 @@ function App() {
       <ThemeProvider theme={theme}>
         <>
           <GlobalStyle />
-          <nav>
-            <Link to={toUserListView}>Users List</Link>
-            <Link to={toAddUserView}>Add user</Link>
-          </nav>
-          <MainWrapper>
-            <Switch>
-              <Route path={toAddUserView()}>
-                <AddUser
-                  formValues={formValues}
-                  handleInputChange={handleInputChange}
-                  handleAddUser={handleAddUser}
-                />
-              </Route>
-              <Route path={toUserListView()}>
-                <Dashboard
-                  users={users}
-                  isLoading={isLoading}
-                  deleteUser={deleteUser}
-                />
-              </Route>
-              <Route>
-                <Redirect to={toUserListView()} />
-              </Route>
-            </Switch>
-          </MainWrapper>
+          <MainTemplate>
+            <MainWrapper>
+              <Switch>
+                <Route path={toAddUserView()}>
+                  <AddUser
+                    formValues={formValues}
+                    handleInputChange={handleInputChange}
+                    handleAddUser={handleAddUser}
+                  />
+                </Route>
+                <Route path={toDashboard()}>
+                  <Dashboard
+                    users={users}
+                    isLoading={isLoading}
+                    deleteUser={deleteUser}
+                  />
+                </Route>
+                <Route>
+                  <Redirect to={toDashboard()} />
+                </Route>
+              </Switch>
+            </MainWrapper>
+          </MainTemplate>
         </>
       </ThemeProvider>
     </BrowserRouter>
