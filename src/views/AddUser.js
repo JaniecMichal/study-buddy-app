@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ViewWrapper } from 'components/atoms/ViewWrapper';
 import { Title } from 'components/atoms/Title';
 import FormField from 'components/molecules/FormField';
 import { FormButton } from 'components/atoms/FormButton';
+import { UserShape } from 'assets/helpers/types';
 
-const Form = ({ formValues, handleInputChange, handleAddUser }) => {
+const AddUser = ({ formValues, handleInputChange, handleAddUser }) => {
   return (
     <ViewWrapper as="form" onSubmit={handleAddUser}>
       <Title>Add new student:</Title>
@@ -36,4 +38,10 @@ const Form = ({ formValues, handleInputChange, handleAddUser }) => {
   );
 };
 
-export default Form;
+AddUser.propTypes = {
+  formValues: PropTypes.arrayOf(PropTypes.shape(UserShape)),
+  handleInputChange: PropTypes.func.isRequired,
+  handleAddUser: PropTypes.func.isRequired,
+};
+
+export default AddUser;
