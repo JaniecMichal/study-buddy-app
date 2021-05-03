@@ -39,7 +39,7 @@ const AddUser = ({ formValues, handleInputChange, handleAddUser }) => {
 };
 
 AddUser.propTypes = {
-  formValues: PropTypes.arrayOf(PropTypes.shape(UserShape)),
+  formValues: PropTypes.shape(UserShape),
   handleInputChange: PropTypes.func.isRequired,
   handleAddUser: PropTypes.func.isRequired,
 };
