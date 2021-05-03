@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Switch, Route, Link, Redirect } from 'react-router-dom';
 import { GlobalStyle } from 'assets/GlobalStyles/GlobalStyles.js';
 import { theme } from 'assets/theme/theme.js';
 import { ThemeProvider } from 'styled-components';
-import UserList from 'components/organisms/UserList';
 import { MainWrapper } from './styled';
-import Form from 'components/organisms/Form';
+import AddUser from 'views/AddUser';
 import { usersData } from 'data/usersData';
+import { toAddUserView, toUserListView } from 'assets/helpers/routes';
+import Dashboard from './Dashboard';
 
 export const mockAPI = (success) => {
   return new Promise((resolve, reject) => {
@@ -61,23 +63,38 @@ function App() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <>
-        <GlobalStyle />
-        <MainWrapper>
-          <Form
-            formValues={formValues}
-            handleInputChange={handleInputChange}
-            handleAddUser={handleAddUser}
-          />
-          <UserList
-            users={users}
-            isLoading={isLoading}
-            deleteUser={deleteUser}
-          />
-        </MainWrapper>
-      </>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <>
+          <GlobalStyle />
+          <nav>
+            <Link to={toUserListView}>Users List</Link>
+            <Link to={toAddUserView}>Add user</Link>
+          </nav>
+          <MainWrapper>
+            <Switch>
+              <Route path={toAddUserView()}>
+                <AddUser
+                  formValues={formValues}
+                  handleInputChange={handleInputChange}
+                  handleAddUser={handleAddUser}
+                />
+              </Route>
+              <Route path={toUserListView()}>
+                <Dashboard
+                  users={users}
+                  isLoading={isLoading}
+                  deleteUser={deleteUser}
+                />
+              </Route>
+              <Route>
+                <Redirect to={toUserListView()} />
+              </Route>
+            </Switch>
+          </MainWrapper>
+        </>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
