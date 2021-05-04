@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { ViewWrapper } from 'components/atoms/ViewWrapper';
 import UsersList from 'components/organisms/UsersList';
-import { UsersContext } from './App';
+import { UsersContext } from 'providers/UsersProvider';
 
 const Dashboard = () => {
-  const { users, isLoading, deleteUser } = useContext(UsersContext);
+  const { users, deleteUser } = useContext(UsersContext);
   return (
     <ViewWrapper>
-      <UsersList users={users} deleteUser={deleteUser} isLoading={isLoading} />
+      <UsersList users={users} deleteUser={deleteUser} />
     </ViewWrapper>
   );
 };
