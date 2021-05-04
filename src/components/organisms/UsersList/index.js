@@ -5,19 +5,18 @@ import UserListItem from 'components/molecules/UserListItem';
 import { Title } from 'components/atoms/Title';
 import { UserShape } from 'assets/helpers/types';
 
-const UsersList = ({ users, isLoading, deleteUser }) => {
+const UsersList = ({ users, deleteUser }) => {
   return (
     <>
-      <Title>{isLoading ? 'Loading...' : 'Students List:'}</Title>
+      <Title>Students List:</Title>
       <StyledList>
-        {isLoading ||
-          users.map((user) => (
-            <UserListItem
-              userData={user}
-              key={user.name}
-              deleteUser={deleteUser}
-            />
-          ))}
+        {users.map((user) => (
+          <UserListItem
+            userData={user}
+            key={user.name}
+            deleteUser={deleteUser}
+          />
+        ))}
       </StyledList>
     </>
   );
@@ -25,7 +24,6 @@ const UsersList = ({ users, isLoading, deleteUser }) => {
 
 UsersList.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape(UserShape)),
-  isLoading: PropTypes.bool,
   deleteUser: PropTypes.func,
 };
 
