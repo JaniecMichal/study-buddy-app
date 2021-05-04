@@ -3,7 +3,7 @@ import { ViewWrapper } from 'components/atoms/ViewWrapper';
 import { Title } from 'components/atoms/Title';
 import FormField from 'components/molecules/FormField';
 import { FormButton } from 'components/atoms/FormButton';
-import { UsersContext } from './App';
+import { UsersContext } from 'providers/UsersProvider';
 
 const initialFormValues = {
   name: '',
